@@ -1,10 +1,14 @@
 export function updateTax(baseInc, finalInc) {
-    ggbApplet.setValue('a', baseInc);
-    ggbApplet.setValue('b', finalInc);
-    return ggbApplet.getValue('T');
+    ggbApplet.setValue('baseInc', baseInc);
+    ggbApplet.setValue('finalInc', finalInc);
+    return getRoundedValue('TotalTax', 2);
 }
 
+export function setValue(obj, value) {
+    ggbApplet.setValue(obj, value);
+}
 
-function getRoundedValue(obj) {
-    return Math.round(100000 * parseFloat(ggbApplet.getValue(obj))) / 100000
+function getRoundedValue(obj, places) {
+    let mult = 10**places;
+    return Math.round(mult * ggbApplet.getValue(obj)) / mult;
 }

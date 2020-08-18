@@ -1,9 +1,7 @@
 import { parameters, views } from './configGeo';
-// import './intervals'
 import * as ggb from './ggb'
 import '../styles.css'
 import { elements, getInputValue, updateFeedbackSection, resetDOM } from './UI';
-import Interval from './intervals';
 
 let ggbApp = new GGBApplet(parameters, '5.0', views);
 
@@ -36,12 +34,19 @@ function update() {
     const baseInc = parseFloat(getInputValue('baseInc'));
     const finalInc = parseFloat(getInputValue('finalInc'));
     const tax = ggb.updateTax(baseInc, finalInc);
+    console.log(baseInc, finalInc, tax);
     updateFeedbackSection(baseInc, finalInc, tax);
+}
+
+function reset() {
+    resetDOM();
+    ggb.setValue('a', 0);
+    ggb.setValue('b', 0);
 }
 
 window.onload = function() {
     ggbApp.inject('ggbApplet', 'preferHTML5');
     elements.baseIncImput.focus();
-    elements.submit.addEventListener('click', update);
-    elements.newIncBtn.addEventListener('click', resetDOM)
+    elements.submitBtn.addEventListener('click', update);
+    elements.newIncBtn.addEventListener('click', reset)
 }

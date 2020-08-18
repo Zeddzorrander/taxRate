@@ -16,7 +16,7 @@ export const elements = {
 export function updateFeedbackSection(baseInc, finalInc, tax) {
     elements.secInput.style.display = 'none';
     elements.feedback.style.display = 'block';
-    elements.p_feedbackBtn.style.display = 'block';
+    elements.p_feedbackBtns.style.display = 'block';
     let feedback;
     if (baseInc === 0) {
         feedback = `<p>The total tax on an income of $${finalInc} is $${tax}.</p>`
