@@ -40,8 +40,10 @@ function update() {
 
 function reset() {
     resetDOM();
-    ggb.setValue('a', 0);
-    ggb.setValue('b', 0);
+    ggb.setValue('baseInc', 0);
+    ggb.setValue('finalInc', 0);
+    ggb.resetWindow();
+
 }
 
 window.onload = function() {
