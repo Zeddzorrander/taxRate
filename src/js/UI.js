@@ -21,13 +21,9 @@ export function updateFeedbackSection(baseInc, finalInc, tax) {
     if (baseInc === 0) {
         feedback = `<p>The total tax on an income of $${finalInc} is $${tax}.</p>`
     } else {
-        feedback = `<p>The marginal tax </p>`
+        feedback = `<p>The total tax on the $${finalInc - baseInc} earned between $${baseInc} and $${finalInc} is $${tax}.</p>`
     }
     elements.p_feedback.innerHTML = feedback;
-    MathJax.typeset();
-    elements.nextBtn.style.visibility = 'hidden';
-    elements.prevBtn.style.visibility = 'visible';
-    return feedback
 }
 
 export function getInputValue(id) {
@@ -36,7 +32,8 @@ export function getInputValue(id) {
 
 export function resetDOM() {
     elements.feedback.style.display = 'none';
-    elements.secInput1.style.display = 'block';
-    elements.input1.value = '';
-    elements.input1.focus();
+    elements.secInput.style.display = 'block';
+    elements.baseIncImput.value = '';
+    elements.finalIncImput.value = '';
+    elements.baseIncImput.focus();
 }

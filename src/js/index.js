@@ -36,50 +36,8 @@ function update() {
     const baseInc = parseFloat(getInputValue('baseInc'));
     const finalInc = parseFloat(getInputValue('finalInc'));
     const tax = ggb.updateTax(baseInc, finalInc);
-    
+    updateFeedbackSection(baseInc, finalInc, tax);
 }
-
-function newDomain() {
-    ggbAppState.counter = ggbAppState.currentIndex;
-    ggb.newConstruction();
-    ggb.loadCodebase(parameters.ggbBase64);
-    resetDOM();
-}
-
-function prevDomain() {
-    ggbAppState.counter -= 1;
-    let index = ggbAppState.counter;
-    if (index >= 0) {
-        ggb.loadCodebase(ggbAppState.codebases[index]);
-        elements.p_feedback.innerHTML = ggbAppState.feedback[index];
-        MathJax.typeset();
-        elements.nextBtn.style.visibility = 'visible';
-    } else {
-        ggb.loadCodebase(ggbAppState.initCodebase);
-        elements.prevBtn.style.visibility = 'hidden';
-        elements.p_feedback.innerHTML = 'Reached original state.  Click "New Domain" to enter a new domain, or click "Next Interval" to see the first entry.';
-    }
-}
-
-function nextDomain() {
-    ggbAppState.counter += 1;
-    let index = ggbAppState.counter;
-    elements.prevBtn.style.visibility = 'visible';
-    elements.nextBtn.style.visibility = 'visible';
-    ggb.loadCodebase(ggbAppState.codebases[index]);
-    elements.p_feedback.innerHTML = ggbAppState.feedback[index];
-    MathJax.typeset();
-    if (index === ggbAppState.currentIndex) {
-        elements.nextBtn.style.visibility = 'hidden';
-    }
-}
-
-// function handleKeyPress(e) {
-//     if (e.keyCode === 13) {
-//         e.preventDefault();
-//         elements.submit1.click();
-//     }
-// }
 
 window.onload = function() {
     ggbApp.inject('ggbApplet', 'preferHTML5');
